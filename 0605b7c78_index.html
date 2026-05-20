@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bokamoso Resilience Initiative</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --soil:       #3B2A1A;
+      --bark:       #5C3D2E;
+      --clay:       #A0522D;
+      --sand:       #C9A87C;
+      --straw:      #E8D5B0;
+      --cream:      #F5EFE4;
+      --leaf:       #4A6741;
+      --sage:       #7D9B6A;
+      --moss:       #B8C9A3;
+      --sky:        #7BA7BC;
+      --off-white:  #FAF7F2;
+      --dark-text:  #2A1F14;
+      --mid-text:   #6B5744;
+      --light-text: #9C836A;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--off-white);
+      color: var(--dark-text);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4, blockquote {
+      font-family: 'Lora', serif;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── UTILITY ─── */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--clay);
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 900;
+      background: rgba(245,239,228,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--straw);
+    }
+
+    .nav-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .nav-brand-name {
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--soil);
+    }
+
+    .nav-brand-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--clay);
+      margin: 0 2px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .nav-brand-sub {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--mid-text);
+      letter-spacing: 0.06em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--mid-text);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--soil); }
+
+    .nav-donate {
+      background: var(--leaf) !important;
+      color: var(--off-white) !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 4px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-donate:hover { background: var(--soil) !important; }
+
+    /* ─── HERO ─── */
+    #home {
+      padding-top: 64px;
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 64px);
+    }
+
+    .hero-left {
+      padding: 5rem 3rem 5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-left .eyebrow {
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-left .eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1.5px;
+      background: var(--clay);
+    }
+
+    .hero-left h1 {
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 600;
+      color: var(--soil);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-left h1 em {
+      font-style: italic;
+      color: var(--clay);
+    }
+
+    .hero-left p {
+      font-size: 1.05rem;
+      color: var(--mid-text);
+      line-height: 1.75;
+      max-width: 460px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-earth {
+      background: var(--soil);
+      color: var(--off-white);
+      padding: 0.75rem 1.75rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+      border: 2px solid var(--soil);
+    }
+
+    .btn-earth:hover { background: var(--bark); border-color: var(--bark); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--soil);
+      padding: 0.75rem 1.75rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: 2px solid var(--sand);
+      transition: all 0.2s;
+    }
+
+    .btn-ghost:hover { border-color: var(--soil); }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .hero-right-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(59,42,26,0.6), transparent);
+      padding: 2rem;
+    }
+
+    .hero-caption {
+      font-size: 0.8rem;
+      color: rgba(245,239,228,0.8);
+      font-style: italic;
+    }
+
+    .hero-stats {
+      background: var(--soil);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .stat-item {
+      padding: 2rem;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: 'Lora', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--sand);
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: rgba(245,239,228,0.6);
+      line-height: 1.4;
+    }
+
+    /* ─── WHO WE ARE ─── */
+    .who {
+      padding: 7rem 2rem;
+      background: var(--off-white);
+    }
+
+    .who-grid {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .who-sticky {
+      position: sticky;
+      top: 90px;
+    }
+
+    .who-sticky .eyebrow { margin-bottom: 1rem; }
+
+    .who-sticky h2 {
+      font-size: 2rem;
+      color: var(--soil);
+      line-height: 1.3;
+      margin-bottom: 1.5rem;
+    }
+
+    .who-sticky blockquote {
+      border-left: 3px solid var(--clay);
+      padding-left: 1.25rem;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--bark);
+      line-height: 1.6;
+    }
+
+    .who-body p {
+      font-size: 1rem;
+      color: var(--mid-text);
+      line-height: 1.85;
+      margin-bottom: 1.5rem;
+    }
+
+    .focus-list {
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .focus-item {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      padding: 2rem 0;
+      border-top: 1px solid var(--straw);
+    }
+
+    .focus-item:last-child { border-bottom: 1px solid var(--straw); }
+
+    .focus-num {
+      font-family: 'Lora', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--moss);
+      line-height: 1;
+    }
+
+    .focus-content h4 {
+      font-family: 'Lora', serif;
+      font-size: 1.1rem;
+      color: var(--soil);
+      margin-bottom: 0.5rem;
+    }
+
+    .focus-content p {
+      font-size: 0.9rem;
+      color: var(--mid-text);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* ─── PULL QUOTE ─── */
+    .pull-quote-section {
+      background: var(--clay);
+      padding: 5rem 2rem;
+    }
+
+    .pull-quote-section blockquote {
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: center;
+      font-family: 'Lora', serif;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.5;
+    }
+
+    .pull-quote-section .attribution {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: rgba(245,239,228,0.65);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* ─── ABOUT ─── */
+    #about {
+      padding: 7rem 2rem;
+      background: var(--cream);
+    }
+
+    .about-header {
+      max-width: 1080px;
+      margin: 0 auto 4rem;
+    }
+
+    .about-header .eyebrow { margin-bottom: 1rem; }
+
+    .about-header h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      color: var(--soil);
+      max-width: 600px;
+      line-height: 1.3;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-header p {
+      max-width: 620px;
+      color: var(--mid-text);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .mv-row {
+      max-width: 1080px;
+      margin: 0 auto 5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--straw);
+    }
+
+    .mv-box {
+      background: var(--off-white);
+      padding: 3rem;
+    }
+
+    .mv-box .eyebrow { margin-bottom: 1rem; }
+
+    .mv-box h3 {
+      font-size: 1.4rem;
+      color: var(--soil);
+      margin-bottom: 1rem;
+    }
+
+    .mv-box p {
+      color: var(--mid-text);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .values-wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .values-wrap > .eyebrow { margin-bottom: 2.5rem; }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--straw);
+    }
+
+    .value-box {
+      background: var(--off-white);
+      padding: 2.5rem;
+      transition: background 0.2s;
+    }
+
+    .value-box:hover { background: var(--cream); }
+
+    .value-box .vnum {
+      font-family: 'Lora', serif;
+      font-size: 3rem;
+      font-weight: 400;
+      color: var(--straw);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+
+    .value-box h4 {
+      font-size: 1.05rem;
+      color: var(--soil);
+      margin-bottom: 0.5rem;
+    }
+
+    .value-box p {
+      font-size: 0.875rem;
+      color: var(--mid-text);
+      line-height: 1.7;
+    }
+
+    /* ─── PROGRAMS ─── */
+    #programs {
+      padding: 7rem 2rem;
+      background: var(--off-white);
+    }
+
+    .programs-header {
+      max-width: 1080px;
+      margin: 0 auto 5rem;
+    }
+
+    .programs-header .eyebrow { margin-bottom: 1rem; }
+
+    .programs-header h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      color: var(--soil);
+      line-height: 1.3;
+    }
+
+    .program-block {
+      max-width: 1080px;
+      margin: 0 auto 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      background: var(--straw);
+    }
+
+    .program-block:nth-child(even) .program-text { order: 2; }
+    .program-block:nth-child(even) .program-visual { order: 1; }
+
+    .program-text {
+      background: var(--off-white);
+      padding: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .program-text .pill {
+      display: inline-block;
+      background: var(--moss);
+      color: var(--soil);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      border-radius: 2px;
+      margin-bottom: 1.25rem;
+      width: fit-content;
+    }
+
+    .program-block:nth-child(2) .pill { background: var(--straw); color: var(--bark); }
+    .program-block:nth-child(3) .pill { background: #C5D5E0; color: #2A3F4D; }
+
+    .program-text h3 {
+      font-size: 1.4rem;
+      color: var(--soil);
+      line-height: 1.35;
+      margin-bottom: 1rem;
+    }
+
+    .program-text p {
+      font-size: 0.925rem;
+      color: var(--mid-text);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .program-text p:last-child { margin-bottom: 0; }
+
+    .program-text .highlight {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--straw);
+    }
+
+    .program-text .highlight strong {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--clay);
+      margin-bottom: 0.35rem;
+    }
+
+    .program-text .highlight p {
+      margin: 0;
+      font-size: 0.85rem;
+    }
+
+    .program-visual {
+      background: var(--cream);
+      min-height: 360px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .program-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .program-visual.no-img {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+    }
+
+    .program-visual .pv-num {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-family: 'Lora', serif;
+      font-size: 5rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.15);
+      line-height: 1;
+    }
+
+    /* ─── DONATE ─── */
+    #donate {
+      background: var(--soil);
+      padding: 7rem 2rem;
+    }
+
+    .donate-wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .donate-header {
+      margin-bottom: 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+    }
+
+    .donate-header .eyebrow { color: var(--sand); margin-bottom: 1rem; }
+
+    .donate-header h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      color: var(--cream);
+      line-height: 1.3;
+    }
+
+    .donate-header p {
+      color: rgba(201,168,124,0.75);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .tiers {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: var(--bark);
+      margin-bottom: 3rem;
+    }
+
+    .tier-box {
+      background: rgba(255,255,255,0.04);
+      padding: 2.5rem 1.75rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      position: relative;
+    }
+
+    .tier-box:hover { background: rgba(255,255,255,0.08); }
+    .tier-box.active { background: rgba(201,168,124,0.12); }
+
+    .tier-box.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--sand);
+    }
+
+    .tier-amt {
+      font-family: 'Lora', serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: var(--sand);
+      margin-bottom: 0.1rem;
+    }
+
+    .tier-pula {
+      font-size: 0.75rem;
+      color: rgba(201,168,124,0.5);
+      margin-bottom: 1rem;
+    }
+
+    .tier-name {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--moss);
+      margin-bottom: 0.75rem;
+    }
+
+    .tier-box p {
+      font-size: 0.82rem;
+      color: rgba(245,239,228,0.55);
+      line-height: 1.65;
+    }
+
+    .donate-cta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-sand {
+      background: var(--sand);
+      color: var(--soil);
+      padding: 0.8rem 2rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+      border: 2px solid var(--sand);
+    }
+
+    .btn-sand:hover { background: var(--straw); border-color: var(--straw); }
+
+    .btn-outline-light {
+      background: transparent;
+      color: var(--cream);
+      padding: 0.8rem 2rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: 2px solid rgba(201,168,124,0.35);
+      transition: all 0.2s;
+    }
+
+    .btn-outline-light:hover { border-color: var(--sand); color: var(--sand); }
+
+    .payment-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .payment-row span {
+      font-size: 0.78rem;
+      color: rgba(245,239,228,0.35);
+    }
+
+    .pay-tag {
+      font-size: 0.72rem;
+      color: rgba(245,239,228,0.5);
+      border: 1px solid rgba(245,239,228,0.12);
+      border-radius: 3px;
+      padding: 0.2rem 0.55rem;
+    }
+
+    .other-support {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--bark);
+      margin-bottom: 3rem;
+    }
+
+    .support-box {
+      background: rgba(255,255,255,0.04);
+      padding: 2rem 2.5rem;
+    }
+
+    .support-box h4 {
+      font-family: 'Lora', serif;
+      font-size: 1.1rem;
+      color: var(--cream);
+      margin-bottom: 0.75rem;
+    }
+
+    .support-box p {
+      font-size: 0.875rem;
+      color: rgba(245,239,228,0.55);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .btn-text-sand {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--sand);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s;
+    }
+
+    .btn-text-sand:hover { color: var(--straw); }
+
+    .promise-box {
+      border: 1px solid rgba(201,168,124,0.15);
+      border-radius: 2px;
+      padding: 2rem 2.5rem;
+    }
+
+    .promise-box p {
+      font-size: 0.9rem;
+      color: rgba(245,239,228,0.6);
+      line-height: 1.8;
+      font-style: italic;
+    }
+
+    .promise-box strong { color: var(--sand); font-style: normal; }
+
+    /* ─── CONTACT ─── */
+    #contact {
+      padding: 7rem 2rem;
+      background: var(--cream);
+    }
+
+    .contact-wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .contact-top {
+      margin-bottom: 4rem;
+    }
+
+    .contact-top .eyebrow { margin-bottom: 1rem; }
+
+    .contact-top h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      color: var(--soil);
+      line-height: 1.3;
+      max-width: 500px;
+      margin-bottom: 1rem;
+    }
+
+    .contact-top p {
+      color: var(--mid-text);
+      max-width: 560px;
+      line-height: 1.8;
+    }
+
+    .ways-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--straw);
+      margin-bottom: 4rem;
+    }
+
+    .way-box {
+      background: var(--off-white);
+      padding: 2.5rem 2rem;
+      transition: background 0.2s;
+    }
+
+    .way-box:hover { background: var(--cream); }
+
+    .way-icon {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .way-box h4 {
+      font-size: 1rem;
+      color: var(--soil);
+      margin-bottom: 0.5rem;
+    }
+
+    .way-box p {
+      font-size: 0.875rem;
+      color: var(--mid-text);
+      line-height: 1.7;
+    }
+
+    .contact-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .contact-info h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.3rem;
+      color: var(--soil);
+      margin-bottom: 2rem;
+    }
+
+    .ci-row {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+
+    .ci-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--clay);
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+
+    .ci-row strong {
+      display: block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--light-text);
+      margin-bottom: 0.2rem;
+    }
+
+    .ci-row span {
+      font-size: 0.95rem;
+      color: var(--soil);
+    }
+
+    .social-row {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .s-link {
+      width: 38px; height: 38px;
+      border: 1.5px solid var(--straw);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      color: var(--mid-text);
+      transition: all 0.2s;
+    }
+
+    .s-link:hover {
+      border-color: var(--clay);
+      color: var(--clay);
+    }
+
+    /* ─── FORM ─── */
+    .form-wrap h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.3rem;
+      color: var(--soil);
+      margin-bottom: 2rem;
+    }
+
+    .field {
+      margin-bottom: 1.25rem;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--mid-text);
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      background: var(--off-white);
+      border: 1.5px solid var(--straw);
+      border-radius: 3px;
+      padding: 0.75rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--dark-text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus { border-color: var(--clay); }
+
+    .field textarea { resize: vertical; min-height: 100px; }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--leaf);
+      color: var(--off-white);
+      border: none;
+      padding: 0.9rem;
+      border-radius: 3px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-submit:hover { background: var(--soil); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--soil);
+      padding: 5rem 2rem 2.5rem;
+    }
+
+    .footer-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.1rem;
+      color: var(--cream);
+      margin-bottom: 0.25rem;
+    }
+
+    .footer-brand .f-sub {
+      font-size: 0.72rem;
+      color: var(--sand);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.85rem;
+      color: rgba(245,239,228,0.45);
+      line-height: 1.7;
+      max-width: 270px;
+    }
+
+    .footer-col h5 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(245,239,228,0.35);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+
+    .footer-col ul a {
+      font-size: 0.875rem;
+      color: rgba(245,239,228,0.5);
+      transition: color 0.2s;
+    }
+
+    .footer-col ul a:hover { color: var(--sand); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.78rem;
+      color: rgba(245,239,228,0.25);
+    }
+
+    .footer-bottom em {
+      color: var(--sand);
+      font-style: italic;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .hero-main { grid-template-columns: 1fr; }
+      .hero-right { height: 55vw; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+      .who-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .who-sticky { position: static; }
+      .mv-row, .values-grid { grid-template-columns: 1fr; }
+      .tiers { grid-template-columns: 1fr 1fr; }
+      .other-support, .contact-bottom { grid-template-columns: 1fr; }
+      .ways-grid { grid-template-columns: 1fr; }
+      .program-block { grid-template-columns: 1fr; }
+      .program-block:nth-child(even) .program-text,
+      .program-block:nth-child(even) .program-visual { order: unset; }
+      .program-visual { min-height: 260px; }
+      .donate-header { grid-template-columns: 1fr; gap: 1.5rem; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-stats { grid-template-columns: 1fr; }
+      .tiers { grid-template-columns: 1fr; }
+      .hero-left { padding: 3rem 0; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+
+    /* ─── FADE IN ─── */
+    .appear {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .appear.in { opacity: 1; transform: none; }
+
+    /* ─── PHOTO STRIP ─── */
+    .photo-strip {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3px;
+      background: var(--soil);
+      max-height: 420px;
+      overflow: hidden;
+    }
+
+    .photo-strip img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .photo-strip img:hover { transform: scale(1.03); }
+
+    .photo-strip-cell {
+      overflow: hidden;
+    }
+
+    /* ─── COVERAGE ─── */
+    .coverage {
+      background: var(--off-white);
+      padding: 6rem 2rem;
+      border-top: 1px solid var(--straw);
+    }
+
+    .coverage-header {
+      max-width: 1080px;
+      margin: 0 auto 3rem;
+    }
+
+    .coverage-header .eyebrow { margin-bottom: 1rem; }
+
+    .coverage-header h2 {
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      color: var(--soil);
+      line-height: 1.3;
+    }
+
+    .coverage-grid {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--straw);
+    }
+
+    .coverage-card {
+      background: var(--off-white);
+      padding: 2rem 2rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: background 0.2s;
+    }
+
+    .coverage-card:hover { background: var(--cream); }
+
+    .coverage-card .c-org {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--clay);
+    }
+
+    .coverage-card h4 {
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+      color: var(--soil);
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .coverage-card p {
+      font-size: 0.82rem;
+      color: var(--mid-text);
+      line-height: 1.6;
+    }
+
+    .coverage-card a {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--leaf);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s;
+      width: fit-content;
+    }
+
+    .coverage-card a:hover { color: var(--clay); }
+
+    @media (max-width: 900px) {
+      .coverage-grid { grid-template-columns: 1fr; }
+      .photo-strip { grid-template-columns: 1fr 1fr; max-height: none; }
+      .photo-strip .photo-strip-cell:last-child { display: none; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="nav-brand">
+      <span class="nav-brand-name">Bokamoso Resilience Initiative</span>
+      <span class="nav-brand-dot"></span>
+      <span class="nav-brand-sub">Gaborone, Botswana</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#contact">Get Involved</a></li>
+      <li><a href="#donate" class="nav-donate">Donate</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-main">
+    <div class="hero-left container" style="max-width:none; padding-left: clamp(1.5rem, 5vw, 5rem);">
+      <div class="eyebrow">Youth-led · Climate Action · Botswana</div>
+      <h1>Building a <em>climate-resilient</em> tomorrow, led by youth today.</h1>
+      <p>We empower communities across Botswana to face climate change through education, creative advocacy, and grassroots action — because the people most affected must be the ones leading the solutions.</p>
+      <div class="hero-buttons">
+        <a href="#programs" class="btn-earth">Our Pillars</a>
+        <a href="#donate" class="btn-ghost">Support Our Work</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img src="https://media.base44.com/images/public/6a0ce97ebe72560946427e1c/20d15d096__MG_9436.jpg" alt="Youth speaker at the African Climate Creatives Showcase, Gaborone" />
+      <div class="hero-right-overlay">
+        <p class="hero-caption">African Climate Creatives Showcase — Stanbic Accelerate, Gaborone, August 2025</p>
+      </div>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Core program pillars reaching youth & communities</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">Local</div>
+      <div class="stat-label">Community-centric, grassroots-first approach</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">Global</div>
+      <div class="stat-label">Youth voices elevated to UNFCCC COP platforms</div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- PHOTO STRIP -->
+  <div class="photo-strip">
+    <div class="photo-strip-cell">
+      <img src="https://media.base44.com/images/public/6a0ce97ebe72560946427e1c/8a9199c1f__MG_9450.jpg" alt="BRI community group photo — African Climate Creatives Showcase" />
+    </div>
+    <div class="photo-strip-cell">
+      <img src="https://media.base44.com/images/public/6a0ce97ebe72560946427e1c/ce6c4df26__MG_9494.jpg" alt="Attendee at African Climate Creatives Showcase" />
+    </div>
+    <div class="photo-strip-cell">
+      <img src="https://media.base44.com/images/public/6a0ce97ebe72560946427e1c/c7dfe9000__MG_9581.jpg" alt="Audience engaged at BRI event" />
+    </div>
+  </div>
+
+<!-- WHO WE ARE -->
+<section class="who">
+  <div class="who-grid">
+    <div class="who-sticky appear">
+      <div class="eyebrow">Who We Are</div>
+      <h2>Where climate science meets creative advocacy</h2>
+      <blockquote>"Bokamoso" means future. We believe securing a resilient future requires local, community-driven action.</blockquote>
+    </div>
+    <div class="who-body appear">
+      <p>The Bokamoso Resilience Initiative is a youth-led, community-centric social enterprise based in Botswana. We bridge the gap between high-level climate policy and grassroots reality.</p>
+      <p>By equipping children, young people, and vulnerable communities with the tools of climate literacy and disaster preparedness, we ensure that those most affected by environmental changes are the ones leading the solutions.</p>
+      <div class="focus-list">
+        <div class="focus-item">
+          <div class="focus-num">01</div>
+          <div class="focus-content">
+            <h4>Climate Education & Action</h4>
+            <p>We translate complex climate science into accessible, creative learning experiences for children and youth — making the next generation see themselves as innovators, not victims.</p>
+          </div>
+        </div>
+        <div class="focus-item">
+          <div class="focus-num">02</div>
+          <div class="focus-content">
+            <h4>Disaster Risk Reduction</h4>
+            <p>We actively step in to fill critical emergency response and awareness gaps in local communities — before disaster strikes, not after.</p>
+          </div>
+        </div>
+        <div class="focus-item">
+          <div class="focus-num">03</div>
+          <div class="focus-content">
+            <h4>Climate Justice & Policy Advocacy</h4>
+            <p>We ensure youth voices from Botswana aren't just heard at home — they're elevated all the way to global platforms like the UNFCCC COP.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PULL QUOTE -->
+<div class="pull-quote-section">
+  <blockquote>"Young people face the brunt of the accelerating climate crisis — yet they are often left out of the decision-making room. We set out to change that."</blockquote>
+  <p class="attribution">— Bokamoso Resilience Initiative, Founded in Gaborone</p>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-header appear">
+      <div class="eyebrow">About Us</div>
+      <h2>Our story, mission & values</h2>
+      <p>BRI operates as a dynamic space where climate science meets creative advocacy. From local workshops to regional climate networks, we build social resilience — giving people the mental, educational, and practical tools to thrive despite environmental challenges.</p>
+    </div>
+
+    <div class="mv-row appear">
+      <div class="mv-box">
+        <div class="eyebrow">Our Mission</div>
+        <h3>Empowerment through education, preparedness & advocacy</h3>
+        <p>To empower local communities, particularly youth and children, through creative climate education, community-driven disaster preparedness, and robust policy advocacy.</p>
+      </div>
+      <div class="mv-box">
+        <div class="eyebrow">Our Vision</div>
+        <h3>A climate-resilient Botswana, shaped by its youth</h3>
+        <p>A Botswana where empowered youth actively shape sustainable policies and safeguard their environments — for themselves and for generations to come.</p>
+      </div>
+    </div>
+
+    <div class="values-wrap appear">
+      <div class="eyebrow">Our Values</div>
+      <br/>
+      <div class="values-grid">
+        <div class="value-box">
+          <div class="vnum">01</div>
+          <h4>Youth-Led Innovation</h4>
+          <p>We trust the creativity, energy, and leadership of young people to drive lasting, meaningful change in their communities.</p>
+        </div>
+        <div class="value-box">
+          <div class="vnum">02</div>
+          <h4>Community-Centric Solutions</h4>
+          <p>True resilience starts at the roots — with local knowledge, local needs, and local people setting the agenda.</p>
+        </div>
+        <div class="value-box">
+          <div class="vnum">03</div>
+          <h4>Climate Justice</h4>
+          <p>Everyone deserves a safe, stable environment. We fight for equitable resources and representation for vulnerable communities.</p>
+        </div>
+        <div class="value-box">
+          <div class="vnum">04</div>
+          <h4>Collaboration</h4>
+          <p>We build bridges between civil society, youth networks, and policymakers across Africa — because no one does this alone.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs">
+  <div class="container">
+    <div class="programs-header appear">
+      <div class="eyebrow">Programs & Pillars</div>
+      <h2>Three pillars of action</h2>
+    </div>
+
+    <div class="program-block appear">
+      <div class="program-text">
+        <div class="pill">Pillar One</div>
+        <h3>Climate Education & The Africa Climate Creatives Fellowship</h3>
+        <p>Standard textbooks aren't enough to inspire climate action. Through creative mediums, storytelling, and local languages, we teach the next generation about environmental stewardship.</p>
+        <p>Our flagship initiatives engage young minds to see themselves not as victims of climate change, but as innovators and creative advocates for the world they want to inherit.</p>
+        <div class="highlight">
+          <strong>Africa Climate Creatives Fellowship</strong>
+          <p>Supporting young creative leaders with mentorship, resources, and seed funding to develop community-rooted climate advocacy projects.</p>
+        </div>
+      </div>
+      <div class="program-visual">
+        <img src="https://media.base44.com/images/public/6a0ce97ebe72560946427e1c/af18d7ba7__MG_9589.jpg" alt="Panel discussion at the African Climate Creatives Showcase" />
+        <div class="pv-num">01</div>
+      </div>
+    </div>
+
+    <div class="program-block appear">
+      <div class="program-text">
+        <div class="pill">Pillar Two</div>
+        <h3>Disaster Risk Reduction & Emergency Response</h3>
+        <p>When extreme weather strikes, communities need immediate, localized knowledge to protect themselves. BRI works on the ground to create vital resources that bridge gaps in national emergency responses.</p>
+        <p>We equip community leaders with frameworks, knowledge, and tools they need — before disaster strikes, not after.</p>
+        <div class="highlight">
+          <strong>The Botswana Floods Project</strong>
+          <p>Community-focused risk maps, safety guidelines, and awareness campaigns to mitigate flood damage in high-risk zones across Botswana.</p>
+        </div>
+      </div>
+      <div class="program-visual">
+        <img src="https://media.base44.com/images/public/6a0ce97ebe72560946427e1c/d7462658c__MG_9548.jpg" alt="Community gathering and workshop session" style="width:100%;height:100%;object-fit:cover;" />
+        <div class="pv-num">02</div>
+      </div>
+    </div>
+
+    <div class="program-block appear">
+      <div class="program-text">
+        <div class="pill">Pillar Three</div>
+        <h3>Climate Justice & Policy Advocacy</h3>
+        <p>We don't just work in communities; we work in the halls of power. BRI researches and writes evidence-based policy briefs that reflect the lived realities of people in Botswana.</p>
+        <p>We train youth advocates to navigate high-level political spaces — ensuring meaningful participation in national frameworks and global climate summits, including the UNFCCC COP.</p>
+        <div class="highlight">
+          <strong>Youth Policy Briefs</strong>
+          <p>Actionable, evidence-based documents developed with and by young people — designed to influence local, regional, and international climate decision-making.</p>
+        </div>
+      </div>
+      <div class="program-visual no-img" style="background: #C5D5E0; color: #2A3F4D;">
+        🏛️
+        <div class="pv-num">03</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- COVERAGE & RECOGNITION -->
+  <section class="coverage">
+    <div class="coverage-header appear">
+      <div class="eyebrow">As Seen In</div>
+      <h2>Recognition & Coverage</h2>
+    </div>
+    <div class="coverage-grid appear">
+      <div class="coverage-card">
+        <div class="c-org">UNDRR — United Nations</div>
+        <h4>Disaster Risk Reduction & Resilience Building: Commitment to Action</h4>
+        <p>BRI's work on community-level disaster risk reduction featured as part of the global DRR commitment platform.</p>
+        <a href="https://www.undrr.org/event/disaster-risk-reduction-and-resilience-building-commitment-action" target="_blank" rel="noopener">View on UNDRR →</a>
+      </div>
+      <div class="coverage-card">
+        <div class="c-org">UN Web TV</div>
+        <h4>BRI Featured on United Nations Web Television</h4>
+        <p>Bokamoso Resilience Initiative's climate advocacy and youth leadership work covered on the UN's global media platform.</p>
+        <a href="https://webtv.un.org/en/asset/k1w/k1wupran9m" target="_blank" rel="noopener">Watch on UN Web TV →</a>
+      </div>
+      <div class="coverage-card">
+        <div class="c-org">Chaabo 2026 — Climate Hackathon</div>
+        <h4>BRI Named as Official Mentor for the Chaabo Climate Resilience Hackathon</h4>
+        <p>Recognised as a leading voice in climate resilience, BRI selected as mentors for the 2026 Climate Resilience Hackathon Challenge.</p>
+        <a href="https://web.facebook.com/100054339799066/posts/meet-our-mentors-for-the-chaabo-2026-climate-resilience-hackathon-challenge-boit/1414358597052120/" target="_blank" rel="noopener">Read announcement →</a>
+      </div>
+    </div>
+  </section>
+
+<!-- DONATE -->
+<section id="donate">
+  <div class="donate-wrap">
+    <div class="donate-header appear">
+      <div>
+        <div class="eyebrow">Invest in Resilience</div>
+        <h2>Your support creates real change</h2>
+      </div>
+      <p>Botswana is on the frontlines of the climate crisis — facing droughts, erratic rainfall, and severe flooding. We turn your support into immediate, practical impact. We keep overhead low so the vast majority of your funds go directly into community programs.</p>
+    </div>
+
+    <div class="tiers appear">
+      <div class="tier-box active" onclick="selectTier(this)">
+        <div class="tier-amt">$25</div>
+        <div class="tier-pula">P350</div>
+        <div class="tier-name">Climate Literacy</div>
+        <p>Eco-educational materials and storytelling tools for 5 children in our grassroots workshops.</p>
+      </div>
+      <div class="tier-box" onclick="selectTier(this)">
+        <div class="tier-amt">$100</div>
+        <div class="tier-pula">P1,400</div>
+        <div class="tier-name">Community Preparedness</div>
+        <p>Prints and distributes localized Botswana Floods Project emergency safety maps to vulnerable households.</p>
+      </div>
+      <div class="tier-box" onclick="selectTier(this)">
+        <div class="tier-amt">$500</div>
+        <div class="tier-pula">P7,000</div>
+        <div class="tier-name">Youth Fellowship</div>
+        <p>Fully sponsors one young leader's participation in the Africa Climate Creatives Fellowship — mentorship and seed funding included.</p>
+      </div>
+      <div class="tier-box" onclick="selectTier(this)">
+        <div class="tier-amt">$1,500</div>
+        <div class="tier-pula">P21,000</div>
+        <div class="tier-name">Resilience Hub</div>
+        <p>Funds a full community DRR workshop, training local leaders in emergency preparedness and response.</p>
+      </div>
+    </div>
+
+    <div class="donate-cta appear">
+      <a href="mailto:info@bokamosoresilience.org?subject=Donation%20Enquiry" class="btn-sand">Give Once</a>
+      <a href="mailto:info@bokamosoresilience.org?subject=Monthly%20Giving" class="btn-outline-light">Give Monthly</a>
+    </div>
+    <div class="payment-row appear">
+      <span>Accepted:</span>
+      <span class="pay-tag">Visa</span>
+      <span class="pay-tag">Mastercard</span>
+      <span class="pay-tag">PayPal</span>
+      <span class="pay-tag">Orange Money</span>
+      <span class="pay-tag">MyZuri</span>
+    </div>
+
+    <div class="other-support appear">
+      <div class="support-box">
+        <h4>Corporate Partnerships & Grants</h4>
+        <p>Looking to fulfill CSR goals or invest ESG capital where it matters? Partner with BRI to build lasting environmental impact across Botswana.</p>
+        <a href="#contact" class="btn-text-sand">Contact our partnership team →</a>
+      </div>
+      <div class="support-box">
+        <h4>Direct Bank Transfer (EFT)</h4>
+        <p>Prefer a direct wire? Get in touch for our full banking details — including branch code and SWIFT code for international transfers.</p>
+        <a href="#contact" class="btn-text-sand">Request bank details →</a>
+      </div>
+    </div>
+
+    <div class="promise-box appear">
+      <p><strong>Our promise:</strong> We provide annual impact reports and regular updates to our donor community. When you invest in BRI, you receive concrete updates — the stories, faces, and data behind the projects you made possible.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GET INVOLVED & CONTACT -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="contact-top appear">
+      <div class="eyebrow">Get Involved</div>
+      <h2>Partner with us</h2>
+      <p>Climate resilience cannot be built in isolation. Whether you are an international NGO, a local school, a corporate sponsor, or a regional network — your partnership amplifies our impact.</p>
+    </div>
+
+    <div class="ways-grid appear">
+      <div class="way-box">
+        <div class="way-icon">🏫</div>
+        <h4>Host a Workshop</h4>
+        <p>Let's bring climate literacy to your school or youth group. We design engaging, culturally relevant sessions for all ages.</p>
+      </div>
+      <div class="way-box">
+        <div class="way-icon">🤝</div>
+        <h4>Support Our Projects</h4>
+        <p>Fund our ongoing Disaster Risk Reduction resources and youth fellowships. Every contribution drives real community impact.</p>
+      </div>
+      <div class="way-box">
+        <div class="way-icon">🌱</div>
+        <h4>Join the Movement</h4>
+        <p>Are you a young creative or advocate in Botswana? We want your voice. Join a growing network of change-makers.</p>
+      </div>
+    </div>
+
+    <div class="contact-bottom appear">
+      <div class="contact-info">
+        <h3>Contact</h3>
+        <div class="ci-row">
+          <div class="ci-dot"></div>
+          <div>
+            <strong>Location</strong>
+            <span>Gaborone, Botswana</span>
+          </div>
+        </div>
+        <div class="ci-row">
+          <div class="ci-dot"></div>
+          <div>
+            <strong>Email</strong>
+            <span>info@bokamosoresilience.org</span>
+          </div>
+        </div>
+        <div class="ci-row">
+          <div class="ci-dot"></div>
+          <div>
+            <strong>Follow Along</strong>
+            <span>LinkedIn · Twitter/X · Instagram</span>
+          </div>
+        </div>
+        <div class="social-row">
+          <a href="https://www.linkedin.com/company/bokamoso-resilience-initiative" target="_blank" rel="noopener" class="s-link" title="LinkedIn">in</a>
+          <a href="https://web.facebook.com/people/Bokamoso-Resilience-Initiative/61574791537665/" target="_blank" rel="noopener" class="s-link" title="Facebook">f</a>
+          <a href="https://www.instagram.com/bokamosoresilience/" target="_blank" rel="noopener" class="s-link" title="Instagram">ig</a>
+        </div>
+      </div>
+
+      <div class="form-wrap">
+        <h3>Send a message</h3>
+        <form onsubmit="handleForm(event)">
+          <div class="field">
+            <label>Name</label>
+            <input type="text" placeholder="Your full name" required />
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com" required />
+          </div>
+          <div class="field">
+            <label>I'm interested in…</label>
+            <select>
+              <option>Donating</option>
+              <option>Partnership / CSR</option>
+              <option>Hosting a Workshop</option>
+              <option>Joining the Fellowship</option>
+              <option>Media & Press</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Message</label>
+            <textarea placeholder="Tell us about yourself and how you'd like to connect…"></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Send message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h3>Bokamoso Resilience Initiative</h3>
+        <div class="f-sub">Gaborone, Botswana</div>
+        <p>A youth-led social enterprise empowering communities across Botswana to face climate change through education, advocacy, and grassroots action.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Navigate</h5>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#programs">Programs</a></li>
+          <li><a href="#donate">Donate</a></li>
+          <li><a href="#contact">Get Involved</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Programs</h5>
+        <ul>
+          <li><a href="#programs">Climate Education</a></li>
+          <li><a href="#programs">Creatives Fellowship</a></li>
+          <li><a href="#programs">Botswana Floods Project</a></li>
+          <li><a href="#programs">Policy Advocacy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="mailto:info@bokamosoresilience.org">Email Us</a></li>
+          <li><a href="#contact">Partnerships</a></li>
+          <li><a href="#donate">Donate</a></li>
+          <li><a href="#contact">Volunteer</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Bokamoso Resilience Initiative · All rights reserved</span>
+      <span><em>"Bokamoso"</em> — the future, in Setswana</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Intersection observer
+  const els = document.querySelectorAll('.appear');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.1 });
+  els.forEach(el => obs.observe(el));
+
+  // Tier selection
+  function selectTier(el) {
+    document.querySelectorAll('.tier-box').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // Form
+  function handleForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-submit');
+    btn.textContent = 'Message sent — we\'ll be in touch soon.';
+    btn.style.background = 'var(--leaf)';
+    btn.disabled = true;
+  }
+</script>
+
+</body>
+</html>
